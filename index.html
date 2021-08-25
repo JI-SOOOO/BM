@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>space</title>
+	<style type="text/css">
+	
+		body{ perspective:9000px; cursor:none; background: black}
+		img{display: block; position: absolute; width:10px; animation: r 5s linear forwards;}
+		@keyframes r { to{ transform: translate3d(0,0,500px)}
+			from{ transform: translate3d(0,0,-10000px)} }
+	</style>
+</head>
+<body>
+</body>
+	<script>
+	document.body.style.height = window.innerHeight + "px";
+	setInterval(star,0.1);
+	function star(){
+		var a = document.createElement("img");
+		a.style.left = randomBH(0,window.innerWidth) + "px";
+		a.style.top = randomBH(10, (window.innerHeight - 200)) + "px";
+		a.src = "nut" + randomBH(1,6) + ".png";
+		a.addEventListener("animationend", function(e){ 
+			e.target.parentNode.removeChild(e.target);
+		});
+		document.body.appendChild(a);
+	}
+		
+	function randomBH(min, max) {
+	  min = Math.ceil(min);
+	  max = Math.floor(max);
+	  return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	window.onmousemove = function(e){
+		document.body.style.perspectiveOrigin = e.clientX + "px " + e.clientY+"px";
+	}
+	</script>
+</html>
+
